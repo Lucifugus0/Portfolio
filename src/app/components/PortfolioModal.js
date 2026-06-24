@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaGithub, FaExternalLinkAlt, FaGooglePlay, FaAppStoreIos } from 'react-icons/fa';
+import { SiFigma } from 'react-icons/si';
 
 /**
  * PORTFOLIO MODAL COMPONENT
@@ -38,14 +39,28 @@ const PortfolioModal = ({ project, onClose }) => {
    */
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  /**
+   * useState untuk Tab Platform Aktif
+   * -----------------------------------
+   * Untuk project multi-platform (mobile, admin web, backend),
+   * menyimpan index platform yang sedang ditampilkan.
+   * null = belum pilih tab, tampilkan overview umum project
+   */
+  const [activePlatform, setActivePlatform] = useState(null);
+
   // Jika tidak ada project, jangan render apa-apa
   if (!project) return null;
 
   // Destructure data dari project
-  const { title, subtitle, images, description, tech, github, demo, playStore, appStore } = project;
+  const { title, subtitle, images, description, tech, github, demo, playStore, appStore, figma, figmaPrototype, platforms } = project;
+
+  const platformList = platforms || [];
+
+  // Jika ada tab platform aktif, tampilkan gambar/tech/deskripsi dari platform tersebut
+  const activeData = activePlatform !== null ? platformList[activePlatform] : null;
 
   // Gunakan array kosong jika images undefined
-  const imageList = images || [];
+  const imageList = activeData ? (activeData.images || []) : (images || []);
 
   /**
    * Navigation Functions
@@ -75,6 +90,19 @@ const PortfolioModal = ({ project, onClose }) => {
     } else if (info.offset.x < -100) {
       nextSlide();
     }
+  };
+
+  /**
+   * Pindah Tab Platform
+   * -------------------
+   * Reset currentIndex ke 0 setiap kali pindah tab,
+   * supaya carousel mulai dari gambar pertama platform yang baru dipilih.
+   *
+   * index === null = kembali ke overview umum project
+   */
+  const selectPlatform = (index) => {
+    setActivePlatform(index);
+    setCurrentIndex(0);
   };
 
   return (
@@ -191,77 +219,149 @@ const PortfolioModal = ({ project, onClose }) => {
           <p className="text-sm text-neutral-500 mb-1">{subtitle}</p>
           <h3 className="text-2xl font-semibold text-neutral-900 mb-4">{title}</h3>
 
-          {/* Description */}
-          {description && (
-            <p className="text-neutral-600 leading-relaxed mb-6">{description}</p>
+          {/* Description - overview umum atau deskripsi platform aktif */}
+          {(activeData ? activeData.description : description) && (
+            <p className="text-neutral-600 leading-relaxed mb-6">
+              {activeData ? activeData.description : description}
+            </p>
           )}
 
-          {/* Tech Stack */}
-          {tech && tech.length > 0 && (
+          {/* Platform Tabs - hanya tampil jika project punya breakdown multi-platform */}
+          {platformList.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-6">
+              <button
+                onClick={() => selectPlatform(null)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activePlatform === null
+                    ? '!bg-neutral-900 text-white'
+                    : '!bg-neutral-100 text-neutral-700 hover:!bg-neutral-200'
+                }`}
+              >
+                Overview
+              </button>
+              {platformList.map((platform, index) => (
+                <button
+                  key={index}
+                  onClick={() => selectPlatform(index)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activePlatform === index
+                      ? '!bg-neutral-900 text-white'
+                      : '!bg-neutral-100 text-neutral-700 hover:!bg-neutral-200'
+                  }`}
+                >
+                  {platform.name}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Tech Stack - tech overview atau tech platform aktif */}
+          {(activeData ? activeData.tech : tech) && (activeData ? activeData.tech : tech).length > 0 && (
             <div className="mb-6">
               <p className="text-sm font-medium text-neutral-900 mb-2">Tech Stack:</p>
               <div className="flex flex-wrap gap-2">
-                {tech.map((item, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-neutral-100 text-neutral-700 text-sm rounded-full"
-                  >
-                    {item}
-                  </span>
-                ))}
+                {(activeData ? activeData.tech : tech).map((item, index) => {
+                  // Dukung format baru { name, icon } maupun format lama (string)
+                  const isObject = typeof item === 'object' && item !== null;
+                  const label = isObject ? item.name : item;
+                  const Icon = isObject ? item.icon : null;
+
+                  return (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-neutral-100 text-neutral-700 text-sm rounded-full"
+                    >
+                      {Icon && <Icon size={14} />}
+                      {label}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           )}
 
-          {/* Action Buttons (GitHub, Demo, Play Store, App Store) */}
-          {(github || demo || playStore || appStore) && (
-            <div className="flex flex-wrap gap-3">
-              {github && (
-                <a
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors"
-                >
-                  <FaGithub size={16} />
-                  View Code
-                </a>
-              )}
-              {demo && (
-                <a
-                  href={demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 text-neutral-900 rounded-full text-sm font-medium hover:bg-neutral-100 transition-colors"
-                >
-                  <FaExternalLinkAlt size={14} />
-                  Live Demo
-                </a>
-              )}
-              {playStore && (
-                <a
-                  href={playStore}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-full text-sm font-medium hover:bg-green-700 transition-colors"
-                >
-                  <FaGooglePlay size={14} />
-                  Play Store
-                </a>
-              )}
-              {appStore && (
-                <a
-                  href={appStore}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
-                >
-                  <FaAppStoreIos size={14} />
-                  App Store
-                </a>
-              )}
-            </div>
-          )}
+          {/* Action Buttons (GitHub, Demo, Play Store, App Store, Figma) - dari overview atau platform aktif */}
+          {(() => {
+            const linkGithub = activeData ? activeData.github : github;
+            const linkDemo = activeData ? activeData.demo : demo;
+            const linkPlayStore = activeData ? activeData.playStore : playStore;
+            const linkAppStore = activeData ? activeData.appStore : appStore;
+            const linkFigma = activeData ? activeData.figma : figma;
+            const linkFigmaPrototype = activeData ? activeData.figmaPrototype : figmaPrototype;
+
+            if (!linkGithub && !linkDemo && !linkPlayStore && !linkAppStore && !linkFigma && !linkFigmaPrototype) return null;
+
+            return (
+              <div className="flex flex-wrap gap-3">
+                {linkGithub && (
+                  <a
+                    href={linkGithub}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors"
+                  >
+                    <FaGithub size={16} />
+                    View Code
+                  </a>
+                )}
+                {linkDemo && (
+                  <a
+                    href={linkDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 text-neutral-900 rounded-full text-sm font-medium hover:bg-neutral-100 transition-colors"
+                  >
+                    <FaExternalLinkAlt size={14} />
+                    Live Demo
+                  </a>
+                )}
+                {linkPlayStore && (
+                  <a
+                    href={linkPlayStore}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-full text-sm font-medium hover:bg-green-700 transition-colors"
+                  >
+                    <FaGooglePlay size={14} />
+                    Play Store
+                  </a>
+                )}
+                {linkAppStore && (
+                  <a
+                    href={linkAppStore}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    <FaAppStoreIos size={14} />
+                    App Store
+                  </a>
+                )}
+                {linkFigma && (
+                  <a
+                    href={linkFigma}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 text-neutral-900 rounded-full text-sm font-medium hover:bg-neutral-100 transition-colors"
+                  >
+                    <SiFigma size={14} />
+                    View Design
+                  </a>
+                )}
+                {linkFigmaPrototype && (
+                  <a
+                    href={linkFigmaPrototype}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 text-neutral-900 rounded-full text-sm font-medium hover:bg-neutral-100 transition-colors"
+                  >
+                    <FaExternalLinkAlt size={14} />
+                    View Prototype
+                  </a>
+                )}
+              </div>
+            );
+          })()}
         </div>
       </motion.div>
     </motion.div>

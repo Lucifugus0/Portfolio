@@ -36,9 +36,9 @@ import Image from 'next/image';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 // Import icon dari react-icons (seperti Font Awesome tapi untuk React)
-import { FaGithub, FaLinkedin, FaInstagram, FaArrowRight, FaQuoteLeft, FaGooglePlay, FaAppStoreIos, FaFigma } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp, FaArrowRight, FaQuoteLeft, FaGooglePlay, FaAppStoreIos, FaFigma } from 'react-icons/fa';
 import { FaReact, FaNodeJs, FaLaravel } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiTypescript, SiMongodb, SiPostgresql, SiFigma } from 'react-icons/si';
+import { SiNextdotjs, SiTailwindcss, SiTypescript, SiMongodb, SiPostgresql, SiFigma, SiFlutter, SiDart, SiMysql } from 'react-icons/si';
 import { HiOutlineCode, HiOutlineDesktopComputer, HiOutlineDatabase, HiOutlineCog } from 'react-icons/hi';
 
 // Import component yang sudah kita buat
@@ -82,8 +82,8 @@ const services = [
     description: 'Designing efficient database schemas and optimizing queries for MySQL, PostgreSQL, and MongoDB.',
   },
   {
-    title: 'Full Stack Solutions',
-    description: 'End-to-end web application development from concept to deployment with modern tech stack.',
+    title: 'AI Engineering',
+    description: 'Integrating intelligent features like LLMs, automation, and smart workflows to make applications think, adapt, and work smarter.',
   },
 ];
 
@@ -92,15 +92,15 @@ const services = [
 const experiences = [
   {
     role: 'Computer Science Student',
-    company: 'Universitas Bunda Mulia - Teknik Informatika',
+    company: 'Universitas Bunda Mulia — Bachelor of Informatics, Artificial Intelligence Specialization',
     description: 'Studying software development, algorithms, and computer systems while building practical projects.',
     years: 'September 2022 - Now',
   },
   {
     role: 'Fullstack Developer', // GANTI dengan posisi Anda
-    company: 'TSNO', // GANTI dengan nama perusahaan
+    company: 'PT Tri Solusi Neo Optima (TSNO)', // GANTI dengan nama perusahaan
     description: 'Developed mobile applications using modern technologies and collaborated with cross-functional teams.',
-    years: 'January 2025 - now', // GANTI dengan tahun yang benar
+    years: 'January 2025 - June 2026', // GANTI dengan tahun yang benar
   },
 ];
 
@@ -109,53 +109,149 @@ const experiences = [
 // Struktur baru: multiple images (karousel), deskripsi lengkap, dan links
 const portfolioItems = [
   {
-    // PROYEK 1: Ulin Mahoni Apps (sudah lengkap)
-    title: 'Ulin Mahoni Apps',
-    subtitle: 'Mobile App Development',
-    thumbnail: '/assets/images/homepage.jpeg',
+    // PROYEK 1: Ulin Mahoni Apps - Full-stack (Mobile, Web/Backend API, Admin Panel)
+    title: 'Ulin Mahoni',
+    subtitle: 'Full-Stack Development',
+    thumbnail: '/assets/images/UlinMahoni/Mobile/M1.jpg',
     images: [
-      '/assets/images/homepage.jpeg',
-      '/assets/images/loginpage.jpeg',
-      '/assets/images/property.jpeg',
-      '/assets/images/mybooking.jpeg',
-      '/assets/images/paymentpage.jpeg',
-      '/assets/images/profile.jpeg',
+      '/assets/images/UlinMahoni/Mobile/M1.jpg',
+      '/assets/images/UlinMahoni/Mobile/M2.jpg',
+      '/assets/images/UlinMahoni/Web/Web1.png',
+      '/assets/images/UlinMahoni/Admin/A1.jpg',
     ],
-    description: 'Aplikasi mobile untuk brand Ulin Mahoni yang menyediakan layanan penyewaan properti seperti kos, villa, dan apartemen. Dilengkapi fitur pencarian, booking, dan pembayaran online.',
-    tech: ['Flutter', 'Dart', 'REST API', 'MySQL'],
-    github: 'https://github.com/Lucifugus0/ulinmahoni',
+    description: 'Ekosistem digital untuk brand Ulin Mahoni yang menyediakan layanan penyewaan properti seperti kos, villa, dan apartemen. Saya terlibat end-to-end: dari prototyping UI/UX di Figma, aplikasi mobile untuk pelanggan, website dan REST API dengan Laravel, hingga admin panel untuk pengelolaan properti.',
+    tech: [
+      { name: 'Figma', icon: SiFigma },
+      { name: 'Flutter', icon: SiFlutter },
+      { name: 'Dart', icon: SiDart },
+      { name: 'Laravel', icon: FaLaravel },
+      { name: 'MySQL', icon: SiMysql },
+    ],
+    github: 'https://github.com/Lucifugus0/ulinmahoni.git',
     demo: null,
-    // Link ke store (opsional) - GANTI dengan link asli jika ada
-    playStore: 'https://play.google.com/store/apps/details?id=your.app.id',
-    appStore: 'https://apps.apple.com/app/your-app/id123456789',
+    // Multi-platform breakdown - ditampilkan sebagai tab di modal
+    platforms: [
+      {
+        name: 'Ulin Mahoni - Mobile',
+        images: [
+          '/assets/images/UlinMahoni/Mobile/M1.jpg',
+          '/assets/images/UlinMahoni/Mobile/M2.jpg',
+          '/assets/images/UlinMahoni/Mobile/M3.jpg',
+          '/assets/images/UlinMahoni/Mobile/M4.jpg',
+          '/assets/images/UlinMahoni/Mobile/M5.jpg',
+          '/assets/images/UlinMahoni/Mobile/M6.jpg',
+          '/assets/images/UlinMahoni/Mobile/M7.jpg',
+          '/assets/images/UlinMahoni/Mobile/M8.jpg',
+          '/assets/images/UlinMahoni/Mobile/M9.jpg',
+          '/assets/images/UlinMahoni/Mobile/M10.jpg',
+        ],
+        description: 'Aplikasi mobile untuk pelanggan dengan fitur pencarian properti, booking, riwayat transaksi, dan pembayaran online.',
+        tech: [
+          { name: 'Flutter', icon: SiFlutter },
+          { name: 'Dart', icon: SiDart },
+        ],
+        github: 'https://github.com/Lucifugus0/ulinmahoni.git',
+        playStore: 'https://play.google.com/store/apps/details?id=com.ulinmahoni.apps',
+        appStore: 'https://apps.apple.com/id/app/ulin-mahoni/id6749755854',
+      },
+      {
+        name: 'Ulin Mahoni - Web/Backend API',
+        images: [
+          '/assets/images/UlinMahoni/Web/Web1.png',
+          '/assets/images/UlinMahoni/Web/Web2.png',
+          '/assets/images/UlinMahoni/Web/Web3.png',
+          '/assets/images/UlinMahoni/Web/Web4.png',
+        ],
+        description: 'Website dan REST API yang menjadi tulang punggung sistem, menangani autentikasi, manajemen data properti, booking, dan integrasi pembayaran.',
+        tech: [
+          { name: 'Laravel', icon: FaLaravel },
+          { name: 'MySQL', icon: SiMysql },
+        ],
+        github: 'https://github.com/Lucifugus0/ulinmahoni.git',
+      },
+      {
+        name: 'Ulin Mahoni - Admin Panel',
+        images: [
+          '/assets/images/UlinMahoni/Admin/A1.jpg',
+          '/assets/images/UlinMahoni/Admin/A2.jpg',
+          '/assets/images/UlinMahoni/Admin/A3.jpg',
+          '/assets/images/UlinMahoni/Admin/A4.jpg',
+          '/assets/images/UlinMahoni/Admin/A5.jpg',
+          '/assets/images/UlinMahoni/Admin/A6.jpg',
+        ],
+        description: 'Panel admin untuk mengelola listing properti, memantau booking, dan mengatur transaksi pelanggan secara real-time.',
+        tech: [
+          { name: 'Laravel', icon: FaLaravel },
+          { name: 'MySQL', icon: SiMysql },
+        ],
+        github: 'https://github.com/Lucifugus0/ulinmahoni.git',
+      },
+      {
+        name: 'Ulin Mahoni - Figma Mobile',
+        images: [
+          '/assets/images/UlinMahoni/FigmaMobile/FM1.png',
+          '/assets/images/UlinMahoni/FigmaMobile/FM2.png',
+        ],
+        description: 'Prototyping UI/UX untuk aplikasi mobile, mulai dari wireframe, user flow, hingga design system yang konsisten sebelum masuk ke tahap development.',
+        tech: [
+          { name: 'Figma', icon: SiFigma },
+        ],
+        figma: 'https://www.figma.com/design/5niRiia7CF1AAtcGLENn6u/Mock-Up-UlinMahoni?node-id=674-2342&t=hoN1hAsjEUbKb4C0-1',
+        figmaPrototype: 'https://www.figma.com/proto/5niRiia7CF1AAtcGLENn6u/Mock-Up-UlinMahoni?node-id=1163-5050&p=f&t=UDmWknpgh4QDRVox-1&scaling=scale-down&content-scaling=fixed&page-id=674%3A2342&starting-point-node-id=674%3A2366',
+      },
+      {
+        name: 'Ulin Mahoni - Figma Web',
+        images: [
+          '/assets/images/UlinMahoni/FigmaWeb/FW1.png',
+          '/assets/images/UlinMahoni/FigmaWeb/FW2.png',
+          '/assets/images/UlinMahoni/FigmaWeb/FW3.png',
+        ],
+        description: 'Prototyping UI/UX untuk website dan admin panel, mencakup layout, komponen, dan alur navigasi sebelum diimplementasikan ke kode.',
+        tech: [
+          { name: 'Figma', icon: SiFigma },
+        ],
+        figma: 'https://www.figma.com/design/5niRiia7CF1AAtcGLENn6u/Mock-Up-UlinMahoni?node-id=0-1&t=hoN1hAsjEUbKb4C0-1',
+        figmaPrototype: 'https://www.figma.com/proto/5niRiia7CF1AAtcGLENn6u/Mock-Up-UlinMahoni?node-id=320-3451&p=f&t=cxh0zQY7PYfrOcur-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=426%3A2353',
+      },
+    ],
   },
   {
-    // PROYEK 2: Placeholder - GANTI dengan proyek Anda
-    title: 'Project Name 2',
+    // PROYEK 2: Wiguna Perkasa Network - Website Pemesanan Layanan WiFi
+    title: 'Wiguna Perkasa Network',
     subtitle: 'Web Development',
-    thumbnail: '/assets/images/property.jpeg', // GANTI dengan screenshot proyek
+    thumbnail: '/assets/images/Wiguna/W1.png',
     images: [
-      '/assets/images/property.jpeg',
-      '/assets/images/homepage.jpeg',
+      '/assets/images/Wiguna/W1.png',
+      '/assets/images/Wiguna/W2.png',
+      '/assets/images/Wiguna/W3.png',
+      '/assets/images/Wiguna/W4.png',
+      '/assets/images/Wiguna/W5.png',
     ],
-    description: 'Deskripsi singkat tentang proyek ini. Jelaskan fitur utama dan teknologi yang digunakan.',
-    tech: ['React', 'Next.js', 'Tailwind CSS'],
-    github: 'https://github.com/Lucifugus0/project2',
-    demo: 'https://project2.vercel.app',
+    description: 'Website untuk pemesanan layanan WiFi dari Wiguna Perkasa Network. Mencakup manajemen pelanggan, integrasi multi payment gateway (BCA, Mandiri, Dana, OVO, ShopeePay), generate QR code untuk pembayaran, serta panel admin untuk mengelola pesanan dan pengiriman pesan ke pelanggan. Dikerjakan secara solo dari awal hingga akhir menggunakan PHP vanilla dan Bootstrap.',
+    tech: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript'],
+    github: 'https://github.com/Lucifugus0/wiguna_perkasa.network.git',
+    demo: null,
   },
   {
-    // PROYEK 3: Placeholder - GANTI dengan proyek Anda
-    title: 'Project Name 3',
-    subtitle: 'UI/UX Design',
-    thumbnail: '/assets/images/profile.jpeg', // GANTI dengan screenshot proyek
+    // PROYEK 3: WHD (Warehouse Delivery/Distribution) - Mobile App
+    title: 'WHD',
+    subtitle: 'Mobile App Development',
+    thumbnail: '/assets/images/WHD/WH1.jpg',
     images: [
-      '/assets/images/profile.jpeg',
-      '/assets/images/loginpage.jpeg',
+      '/assets/images/WHD/WH1.jpg',
+      '/assets/images/WHD/WH2.jpg',
+      '/assets/images/WHD/WH3.jpg',
+      '/assets/images/WHD/WH4.jpg',
+      '/assets/images/WHD/WH5.jpg',
+      '/assets/images/WHD/WH6.jpg',
     ],
-    description: 'Deskripsi singkat tentang proyek ini. Jelaskan fitur utama dan teknologi yang digunakan.',
-    tech: ['Figma', 'Adobe XD'],
-    github: null,
-    demo: 'https://figma.com/file/xxx',
+    description: 'Aplikasi mobile Android untuk dokumentasi outbound kendaraan muatan di gudang PT. Dunia Kimia Jaya. Mencatat detail transaksi (nama pengirim, nomor kendaraan, info kontainer, dll), mewajibkan 9 foto berurutan dengan timestamp otomatis sebagai bukti, lalu menghasilkan laporan PDF terstruktur. Berjalan sepenuhnya offline dengan riwayat hingga 15 record yang bisa diedit, di-rename, dan dibagikan.',
+    tech: [
+      { name: 'Flutter', icon: SiFlutter },
+      { name: 'Dart', icon: SiDart },
+    ],
+    github: 'https://github.com/Lucifugus0/WH-Documentation-Apps.git',
+    demo: null,
   },
 ];
 
@@ -356,10 +452,8 @@ export default function Home() {
                 {[
                   { icon: FaGithub, href: 'https://github.com/Lucifugus0', label: 'GitHub' },
                   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/vincent-muliadi-924157186/', label: 'LinkedIn' },
-                  { icon: FaInstagram, href: 'https://www.instagram.com/vincent_.m24/', label: 'Instagram' },
-                  { icon: SiFigma, href: 'https://figma.com/@yourusername', label: 'Figma' }, // GANTI dengan link Figma Anda
-                  { icon: FaGooglePlay, href: 'https://play.google.com/store/apps/details?id=your.app.id', label: 'Play Store' }, // GANTI dengan link Play Store
-                  { icon: FaAppStoreIos, href: 'https://apps.apple.com/app/your-app-name/id123456789', label: 'App Store' }, // GANTI dengan link App Store
+                  { icon: FaInstagram, href: 'https://www.instagram.com/vin_.m22/', label: 'Instagram' },
+                  { icon: FaWhatsapp, href: 'https://wa.me/6285694608028', label: 'WhatsApp' },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
@@ -401,7 +495,7 @@ export default function Home() {
                   className="object-cover" = Seperti background-size: cover
                 */}
                 <Image
-                  src="/assets/me3.jpeg"
+                  src="/assets/images/Me/me4.jpg"
                   alt="Vincent Muliadi"
                   fill
                   className="object-cover rounded-3xl"
@@ -468,7 +562,7 @@ export default function Home() {
               {/* Profile Image Container */}
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 mb-8">
                 <Image
-                  src="/assets/me2.jpeg"
+                  src="/assets/images/Me/me1.jpeg"
                   alt="Vincent Muliadi"
                   fill
                   className="object-cover"
@@ -674,82 +768,6 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          TESTIMONIAL SECTION
-          ============================================================
-          Quote dari client/partner
-      */}
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <FaQuoteLeft className="text-4xl text-neutral-200 mx-auto mb-8" />
-            <blockquote className="text-2xl md:text-3xl text-neutral-900 leading-relaxed mb-8">
-              "Vincent delivered exceptional work on our project. His attention to detail
-              and ability to turn complex requirements into elegant solutions made our
-              collaboration seamless. Highly recommended for any development work."
-            </blockquote>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-neutral-200 overflow-hidden">
-                <Image
-                  src="/assets/me1.jpeg"
-                  alt="Client"
-                  width={48}
-                  height={48}
-                  className="object-cover"
-                />
-              </div>
-              <div className="text-left">
-                <p className="font-semibold text-neutral-900">Project Partner</p>
-                <p className="text-sm text-neutral-500">Collaborative Project</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          CONTACT SECTION
-          ============================================================
-          Call to Action untuk hire/contact
-      */}
-      <section id="contact" className="py-24 bg-neutral-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight">
-                Let's Connect
-                <br />
-                There
-              </h2>
-            </motion.div>
-
-            <motion.a
-              href="mailto:your.email@example.com"
-              className="mt-8 md:mt-0 inline-flex items-center gap-3 px-8 py-4 bg-white text-neutral-900 rounded-full font-medium hover:bg-neutral-100 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span>Hire Me Now</span>
-              <FaArrowRight />
-            </motion.a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
           FOOTER dengan Animasi
           ============================================================
       */}
@@ -787,7 +805,8 @@ export default function Home() {
                 {[
                   { icon: FaGithub, href: 'https://github.com/Lucifugus0' },
                   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/vincent-muliadi-924157186/' },
-                  { icon: FaInstagram, href: 'https://www.instagram.com/vincent_.m24/' },
+                  { icon: FaInstagram, href: 'https://www.instagram.com/vin_.m22/' },
+                  { icon: FaWhatsapp, href: 'https://wa.me/6285694608028' },
                 ].map((social, index) => (
                   <motion.a
                     key={index}

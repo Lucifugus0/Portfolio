@@ -15,7 +15,7 @@
  */
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -32,20 +32,26 @@ const FloatingParticles = ({ count = 15, className = '' }) => {
   const codeSymbols = ['<', '>', '/', '{', '}', '(', ')', ';', '//', '[]', '{}', '&&', '||', '=>', '++', '==='];
 
   /**
-   * useMemo untuk generate particles sekali saja
-   * Mencegah re-render berlebihan karena random values
+   * Generate particles hanya di client (setelah mount)
+   * Math.random() menghasilkan nilai berbeda antara render di server dan
+   * di client, jadi tidak bisa dihitung saat SSR - harus nunggu useEffect
+   * supaya HTML dari server dan client tidak mismatch (hydration error)
    */
-  const particles = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      symbol: codeSymbols[Math.floor(Math.random() * codeSymbols.length)],
-      x: Math.random() * 100, // Position X (0-100%)
-      y: Math.random() * 100, // Position Y (0-100%)
-      size: 12 + Math.random() * 16, // Font size (12-28px)
-      duration: 15 + Math.random() * 20, // Animation duration (15-35s)
-      delay: Math.random() * 10, // Animation delay (0-10s)
-      opacity: 0.03 + Math.random() * 0.07, // Opacity (0.03-0.1)
-    }));
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: count }, (_, i) => ({
+        id: i,
+        symbol: codeSymbols[Math.floor(Math.random() * codeSymbols.length)],
+        x: Math.random() * 100, // Position X (0-100%)
+        y: Math.random() * 100, // Position Y (0-100%)
+        size: 12 + Math.random() * 16, // Font size (12-28px)
+        duration: 15 + Math.random() * 20, // Animation duration (15-35s)
+        delay: Math.random() * 10, // Animation delay (0-10s)
+        opacity: 0.03 + Math.random() * 0.07, // Opacity (0.03-0.1)
+      }))
+    );
   }, [count]);
 
   return (

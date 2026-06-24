@@ -40,6 +40,7 @@ const PortfolioCard = ({
   subtitle,
   thumbnail,
   images = [],
+  platforms = [],
   slideDelay = 0,
   className = ''
 }) => {
@@ -174,6 +175,20 @@ const PortfolioCard = ({
           <p className="text-white/80 text-sm mb-1">{subtitle}</p>
           {/* Title - nama project */}
           <h3 className="text-white text-xl font-semibold">{title}</h3>
+
+          {/* Platform Badges - tampil jika project punya breakdown multi-platform */}
+          {platforms.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-2">
+              {platforms.map((platform, index) => (
+                <span
+                  key={index}
+                  className="px-2.5 py-1 bg-white/15 backdrop-blur-sm text-white text-xs rounded-full"
+                >
+                  {platform.name}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
