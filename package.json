@@ -9,7 +9,9 @@
     "lint": "node node_modules/next/dist/bin/next lint"
   },
   "dependencies": {
+    "@tailwindcss/oxide-darwin-x64": "^4.2.3",
     "framer-motion": "^12.6.2",
+    "lightningcss-darwin-x64": "^1.32.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
