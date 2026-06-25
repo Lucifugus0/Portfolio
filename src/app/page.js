@@ -36,10 +36,8 @@ import Image from 'next/image';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 // Import icon dari react-icons (seperti Font Awesome tapi untuk React)
-import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp, FaArrowRight, FaQuoteLeft, FaGooglePlay, FaAppStoreIos, FaFigma } from 'react-icons/fa';
-import { FaReact, FaNodeJs, FaLaravel } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiTypescript, SiMongodb, SiPostgresql, SiFigma, SiFlutter, SiDart, SiMysql } from 'react-icons/si';
-import { HiOutlineCode, HiOutlineDesktopComputer, HiOutlineDatabase, HiOutlineCog } from 'react-icons/hi';
+import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp, FaArrowRight, FaLaravel } from 'react-icons/fa';
+import { SiFigma, SiFlutter, SiDart, SiMysql } from 'react-icons/si';
 
 // Import component yang sudah kita buat
 import Marquee from './components/Marquee';
@@ -367,16 +365,6 @@ export default function Home() {
     },
   };
 
-  // Scale in animation
-  const scaleIn = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
   /**
    * ============================================================
    * JSX RETURN
@@ -433,7 +421,7 @@ export default function Home() {
 
               {/* Tagline dengan Typing Effect */}
               <p className="mt-6 text-lg text-neutral-600 max-w-md">
-                Hi, I'm Vincent Muliadi. A Fullstack Developer
+                Hi, I&apos;m Vincent Muliadi. A Fullstack Developer
                 <span className="text-neutral-900 font-medium">
                   {' '}<TypingText text="Turning Coffee into Code" speed={80} delay={1500} />
                 </span>
@@ -543,7 +531,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-neutral-900 leading-tight mb-6">
-                Design has always been more than just a job - it's my passion.
+                Design has always been more than just a job - it&apos;s my passion.
               </h2>
               <p className="text-neutral-600 leading-relaxed">
                 As a fullstack developer, I transform ideas into elegant, scalable web applications.
@@ -625,7 +613,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Let's Talk
+                Let&apos;s Talk
                 <FaArrowRight size={12} />
               </motion.button>
             </motion.div>

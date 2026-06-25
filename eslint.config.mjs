@@ -6,8 +6,14 @@ import pluginReact from "eslint-plugin-react";
 
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
-  { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
-  { files: ["**/*.{js,mjs,cjs,jsx}"], languageOptions: { globals: globals.browser } },
+  { files: ["**/*.{js,mjs,cjs,jsx}"], languageOptions: { sourceType: "module", globals: globals.browser } },
   { files: ["**/*.{js,mjs,cjs,jsx}"], plugins: { js }, extends: ["js/recommended"] },
   pluginReact.configs.flat.recommended,
+  {
+    settings: { react: { version: "detect" } },
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+    },
+  },
 ]);

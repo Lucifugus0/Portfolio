@@ -32,7 +32,6 @@ export const TypingText = ({
   cursor = true,
 }) => {
   const [displayText, setDisplayText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -42,7 +41,6 @@ export const TypingText = ({
 
     // Delay sebelum mulai typing
     const startTimeout = setTimeout(() => {
-      setIsTyping(true);
       let currentIndex = 0;
 
       const typingInterval = setInterval(() => {
@@ -51,7 +49,6 @@ export const TypingText = ({
           currentIndex++;
         } else {
           clearInterval(typingInterval);
-          setIsTyping(false);
         }
       }, speed);
 
